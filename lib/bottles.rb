@@ -10,46 +10,29 @@ class Bottles
   end
 
   def verse(number)
-    case number
-    when 0
-      'No more bottles of beer on the wall, ' +
-        "#{quentity(number)} bottles of beer.\n" +
-        'Go to the store and buy some more, ' +
-        "99 #{container(number)} of beer on the wall.\n"
-    when 1
-      "#{number} #{container(number)} of beer on the wall, " +
-        "#{number} #{container(number)} of beer.\n" +
-        "Take #{pronoun(number)} down and pass it around, " +
-        "#{quentity(number - 1)} bottles of beer on the wall.\n"
-    else
-      "#{number} #{container(number)} of beer on the wall, " +
-        "#{number} #{container(number)} of beer.\n" +
-        "Take #{pronoun(number)} down and pass it around, " +
-        "#{number - 1} #{container(number - 1)} of beer on the wall.\n"
-    end
+    "#{quentity(number).capitalize} #{container(number)} of beer on the wall, " +
+      "#{quentity(number)} #{container(number)} of beer.\n" +
+      "#{action(number)}, " +
+      "#{quentity(successor(number))} #{container(successor(number))} of beer on the wall.\n"
+  end
+
+  def successor(number)
+    number.zero? ? 99 : number - 1
+  end
+
+  def action(number)
+    number.zero? ? 'Go to the store and buy some more' : "Take #{pronoun(number)} down and pass it around"
   end
 
   def quentity(number)
-    if number == 0
-      'no more'
-    else
-      number
-    end
+    number.zero? ? 'no more' : number.to_s
   end
 
   def pronoun(number)
-    if number == 1
-      'it'
-    else
-      'one'
-    end
+    number == 1 ? 'it' : 'one'
   end
 
   def container(number)
-    if number == 1
-      'bottle'
-    else
-      'bottles'
-    end
+    number == 1 ? 'bottle' : 'bottles'
   end
 end
