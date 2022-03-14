@@ -43,7 +43,7 @@ class BottleNumber
   end
 
   def action
-    number.zero? ? 'Go to the store and buy some more' : "Take #{pronoun} down and pass it around"
+    "Take #{pronoun} down and pass it around"
   end
 
   def quentity
@@ -64,6 +64,10 @@ class BottleNumber
 end
 
 class BottleNumber0 < BottleNumber
+  def action
+    'Go to the store and buy some more'
+  end
+
   def quentity
     'no more'
   end
