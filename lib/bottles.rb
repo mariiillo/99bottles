@@ -13,34 +13,43 @@ class Bottles
     case number
     when 0
       'No more bottles of beer on the wall, ' +
-        "#{count_bottles(number)} of beer.\n" +
+        "#{quentity(number)} bottles of beer.\n" +
         'Go to the store and buy some more, ' +
-        "#{count_bottles(99)} of beer on the wall.\n"
+        "99 #{container(number)} of beer on the wall.\n"
+    when 1
+      "#{number} #{container(number)} of beer on the wall, " +
+        "#{number} #{container(number)} of beer.\n" +
+        "Take #{pronoun(number)} down and pass it around, " +
+        "#{quentity(number - 1)} bottles of beer on the wall.\n"
     else
-      "#{count_bottles(number)} of beer on the wall, " +
-        "#{count_bottles(number)} of beer.\n" +
-        "#{take_down(number)} and pass it around, " +
-        "#{count_bottles(number - 1)} of beer on the wall.\n"
+      "#{number} #{container(number)} of beer on the wall, " +
+        "#{number} #{container(number)} of beer.\n" +
+        "Take #{pronoun(number)} down and pass it around, " +
+        "#{number - 1} #{container(number - 1)} of beer on the wall.\n"
     end
   end
 
-  def take_down(number)
-    case number
-    when 1
-      'Take it down'
+  def quentity(number)
+    if number == 0
+      'no more'
     else
-      'Take one down'
+      number
     end
   end
 
-  def count_bottles(number)
-    case number
-    when 0
-      'no more bottles'
-    when 1
-      "#{number} bottle"
+  def pronoun(number)
+    if number == 1
+      'it'
     else
-      "#{number} bottles"
+      'one'
+    end
+  end
+
+  def container(number)
+    if number == 1
+      'bottle'
+    else
+      'bottles'
     end
   end
 end
