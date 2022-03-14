@@ -10,24 +10,34 @@ class Bottles
   end
 
   def verse(number)
-    bottle_number = BottleNumber.new(number)
-    newt_bottle_number = BottleNumber.new(bottle_number.successor)
+    bottle_number = BottleNumber.for(number)
     "#{bottle_number} of beer on the wall, ".capitalize +
       "#{bottle_number} of beer.\n" +
       "#{bottle_number.action}, " +
-      "#{newt_bottle_number} of beer on the wall.\n"
+      "#{bottle_number.successor} of beer on the wall.\n"
   end
 end
 
 class BottleNumber
   attr_reader :number
 
+  def self.for(number)
+    case number
+    when 0
+      BottleNumber0
+    when 1
+      BottleNumber1
+    else
+      BottleNumber
+    end.new(number)
+  end
+
   def initialize(number)
     @number = number
   end
 
   def successor
-    number.zero? ? 99 : number - 1
+    BottleNumber.for(number - 1)
   end
 
   def action
@@ -35,19 +45,38 @@ class BottleNumber
   end
 
   def quentity
-    number.zero? ? 'no more' : number.to_s
+    number.to_s
   end
 
   def pronoun
-    number == 1 ? 'it' : 'one'
+    'one'
   end
 
   def container
-    number == 1 ? 'bottle' : 'bottles'
+    'bottles'
   end
 
   def to_s
     "#{quentity} #{container}"
   end
-  
+end
+
+class BottleNumber0 < BottleNumber
+  def quentity
+    'no more'
+  end
+
+  def successor
+    BottleNumber.for(99)
+  end
+end
+
+class BottleNumber1 < BottleNumber
+  def pronoun
+    'it'
+  end
+
+  def container
+    'bottle'
+  end
 end
