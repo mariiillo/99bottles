@@ -10,29 +10,39 @@ class Bottles
   end
 
   def verse(number)
-    "#{quentity(number).capitalize} #{container(number)} of beer on the wall, " +
-      "#{quentity(number)} #{container(number)} of beer.\n" +
-      "#{action(number)}, " +
-      "#{quentity(successor(number))} #{container(successor(number))} of beer on the wall.\n"
+    bottle_number = BottleNumber.new(number)
+    newt_bottle_number = BottleNumber.new(bottle_number.successor)
+    "#{bottle_number.quentity.capitalize} #{bottle_number.container} of beer on the wall, " +
+      "#{bottle_number.quentity} #{bottle_number.container} of beer.\n" +
+      "#{bottle_number.action}, " +
+      "#{newt_bottle_number.quentity} #{newt_bottle_number.container} of beer on the wall.\n"
+  end
+end
+
+class BottleNumber
+  attr_reader :number
+
+  def initialize(number)
+    @number = number
   end
 
-  def successor(number)
+  def successor
     number.zero? ? 99 : number - 1
   end
 
-  def action(number)
-    number.zero? ? 'Go to the store and buy some more' : "Take #{pronoun(number)} down and pass it around"
+  def action
+    number.zero? ? 'Go to the store and buy some more' : "Take #{pronoun} down and pass it around"
   end
 
-  def quentity(number)
+  def quentity
     number.zero? ? 'no more' : number.to_s
   end
 
-  def pronoun(number)
+  def pronoun
     number == 1 ? 'it' : 'one'
   end
 
-  def container(number)
+  def container
     number == 1 ? 'bottle' : 'bottles'
   end
 end
