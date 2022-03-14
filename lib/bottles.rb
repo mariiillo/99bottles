@@ -12,10 +12,10 @@ class Bottles
   def verse(number)
     bottle_number = BottleNumber.new(number)
     newt_bottle_number = BottleNumber.new(bottle_number.successor)
-    "#{bottle_number.quentity.capitalize} #{bottle_number.container} of beer on the wall, " +
-      "#{bottle_number.quentity} #{bottle_number.container} of beer.\n" +
+    "#{bottle_number} of beer on the wall, ".capitalize +
+      "#{bottle_number} of beer.\n" +
       "#{bottle_number.action}, " +
-      "#{newt_bottle_number.quentity} #{newt_bottle_number.container} of beer on the wall.\n"
+      "#{newt_bottle_number} of beer on the wall.\n"
   end
 end
 
@@ -45,4 +45,9 @@ class BottleNumber
   def container
     number == 1 ? 'bottle' : 'bottles'
   end
+
+  def to_s
+    "#{quentity} #{container}"
+  end
+  
 end
